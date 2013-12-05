@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Depot::Application.config.secret_key_base = '4eb791d283be4ddabf2822773de4c7f2683bb6c69533c48fb6771f0afd8447d453d561a0abc89f6ad38fa681dab897de6ef96cbc28b362dae6ee9ab564dc907a'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use existing token
+    File.read(token_file).chomp
+  else
+    # Generate token and store in token_file
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Depot::Application.config.secret_key_base = secure_token
