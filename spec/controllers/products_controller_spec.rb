@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ProductsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Product. As you add validations to Product, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString" } }
+  let(:valid_attributes) { { "title" => "new title",
+      "description" => "new description",
+      'price' => 8.99,
+      'image_url' => 'some_image_url/image.gif'} }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -14,7 +14,7 @@ describe ProductsController do
 
   describe "GET index" do
     it "assigns all products as @products" do
-      product = FactoryGirl.create(:product)
+      product = Product.create! valid_attributes
       get :index, {}, valid_session
       assigns(:products).should eq([product])
     end
@@ -22,7 +22,7 @@ describe ProductsController do
 
   describe "GET show" do
     it "assigns the requested product as @product" do
-      product = FactoryGirl.create(:product)
+      product = Product.create! valid_attributes
       get :show, {:id => product.to_param}, valid_session
       assigns(:product).should eq(product)
     end
