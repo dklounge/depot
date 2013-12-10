@@ -14,7 +14,7 @@ describe ProductsController do
 
   describe "GET index" do
     it "assigns all products as @products" do
-      product = Product.create! valid_attributes
+      product = FactoryGirl.create(:product)
       get :index, {}, valid_session
       assigns(:products).should eq([product])
     end
@@ -22,7 +22,7 @@ describe ProductsController do
 
   describe "GET show" do
     it "assigns the requested product as @product" do
-      product = Product.create! valid_attributes
+      product = FactoryGirl.create(:product)
       get :show, {:id => product.to_param}, valid_session
       assigns(:product).should eq(product)
     end
