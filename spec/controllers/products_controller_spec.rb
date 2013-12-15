@@ -5,15 +5,13 @@ describe ProductsController do
   let(:valid_attributes) { { "title" => "new title",
       "description" => "new description",
       'price' => 8.99,
-      'image_url' => 'some_image_url/image.gif'} }
+      'image_url' => 'some_image_url/image.jpg'} }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ProductsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
     it "assigns all products as @products" do
+      Product.destroy_all
       product = Product.create! valid_attributes
       get :index, {}, valid_session
       assigns(:products).should eq([product])
