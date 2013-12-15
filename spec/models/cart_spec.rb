@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Cart do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:cart) { Cart.new }
+
+  describe '#valid' do
+    it { should have_many(:line_items).dependent(:destroy) }
+  end
 end

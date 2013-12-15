@@ -6,6 +6,15 @@ describe LineItemsController do
 
   let(:valid_session) { { } }
 
+  let(:product_attributes) { { "title" => "test title",
+      "description" => "test",
+      'price' => 8.99,
+      'image_url' => 'some_image_url/image.jpg'} }
+
+  let(:product) { Product.create! product_attributes }
+  # let(:product) { FactoryGirl(:factories) }
+
+
   describe "GET index" do
     it "assigns all line_items as @line_items" do
       line_item = LineItem.create! valid_attributes
@@ -40,19 +49,20 @@ describe LineItemsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new LineItem" do
+
         expect {
-          post :create, {:line_item => valid_attributes}, valid_session
+          post :create, product, {:line_item => valid_attributes}, valid_session
         }.to change(LineItem, :count).by(1)
       end
 
       it "assigns a newly created line_item as @line_item" do
-        post :create, {:line_item => valid_attributes}, valid_session
+        post :create, product, {:line_item => valid_attributes}, valid_session
         assigns(:line_item).should be_a(LineItem)
         assigns(:line_item).should be_persisted
       end
 
       it "redirects to the created line_item" do
-        post :create, {:line_item => valid_attributes}, valid_session
+        post :create, product, {:line_item => valid_attributes}, valid_session
         response.should redirect_to (LineItem.last)
       end
     end
@@ -61,14 +71,14 @@ describe LineItemsController do
       it "assigns a newly created but unsaved line_item as @line_item" do
         # Trigger the behavior that occurs when invalid params are submitted
         LineItem.any_instance.stub(:save).and_return(false)
-        post :create, {:line_item => { "product_id" => "invalid value" }}, valid_session
+        post :create, product, {:line_item => { "product_id" => "invalid value" }}, valid_session
         assigns(:line_item).should be_a_new(LineItem)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         LineItem.any_instance.stub(:save).and_return(false)
-        post :create, {:line_item => { "product_id" => "invalid value" }}, valid_session
+        post :create, product, {:line_item => { "product_id" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
