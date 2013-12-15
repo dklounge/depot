@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe Product do
   # let(:product) { Product.new }
+  describe '#relationships' do
+    it { should have_many(:line_items) }
+  end
 
   describe '#valid?' do
     it { should validate_presence_of(:title) }
