@@ -6,4 +6,8 @@ FactoryGirl.define do
     cart_id 1
   end
 
+  factory :invalid_line_item do
+    product_id 'invalid id'
+  end
+
 end

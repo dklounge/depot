@@ -4,16 +4,11 @@ describe LineItemsController do
 
   let(:valid_attributes) { { "product_id" => "1", "cart_id" => "1" } }
 
+  let(:invalid_attributes) { { "product_id" => nil } }
+
   let(:valid_session) { { } }
 
-  let(:product_attributes) { { "title" => "test title",
-      "description" => "test",
-      'price' => 8.99,
-      'image_url' => 'some_image_url/image.jpg'} }
-
-  let(:product) { Product.create! product_attributes }
-  # let(:product) { FactoryGirl(:factories) }
-
+  let(:product) { FactoryGirl.create(:product) }
 
   describe "GET index" do
     it "assigns all line_items as @line_items" do
@@ -52,20 +47,19 @@ describe LineItemsController do
         # expect {
         #   post :create, {:line_item => valid_attributes}, valid_session
         # }.to change(LineItem, :count).by(1)
-        product = FactoryGirl.create(:product)
         expect {
-          post :create, {:line_item => valid_attributes}
+          post :create, { :line_item => valid_attributes, :product_id => product.id }, valid_session
         }.to change(LineItem, :count).by(1)
       end
 
       it "assigns a newly created line_item as @line_item" do
-        post :create, product, {:line_item => valid_attributes}, valid_session
+        post :create, {:line_item => valid_attributes, :product_id => product.id }, valid_session
         assigns(:line_item).should be_a(LineItem)
         assigns(:line_item).should be_persisted
       end
 
       it "redirects to the created line_item" do
-        post :create, product, {:line_item => valid_attributes}, valid_session
+        post :create, {:line_item => valid_attributes, :product_id => product.id }, valid_session
         response.should redirect_to (LineItem.last)
       end
     end
@@ -74,14 +68,15 @@ describe LineItemsController do
       it "assigns a newly created but unsaved line_item as @line_item" do
         # Trigger the behavior that occurs when invalid params are submitted
         LineItem.any_instance.stub(:save).and_return(false)
-        post :create, product, {:line_item => { "product_id" => "invalid value" }}, valid_session
+        post :create, {:line_item => invalid_attributes, :product_id => product.id }, valid_session
         assigns(:line_item).should be_a_new(LineItem)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         LineItem.any_instance.stub(:save).and_return(false)
-        post :create, product, {:line_item => { "product_id" => "invalid value" }}, valid_session
+        post :create, {:line_item => invalid_attributes, :product_id => product.id }, valid_session
+        # post :create, line_item: FactoryGirl.create(:invalid_line_item)
         response.should render_template("new")
       end
     end
