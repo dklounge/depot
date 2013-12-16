@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe LineItemsController do
 
-  let(:valid_attributes) { { "product_id" => "1" } }
+  let(:valid_attributes) { { "product_id" => "1", "cart_id" => "1" } }
 
   let(:valid_session) { { } }
 
@@ -49,9 +49,12 @@ describe LineItemsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new LineItem" do
-
+        # expect {
+        #   post :create, {:line_item => valid_attributes}, valid_session
+        # }.to change(LineItem, :count).by(1)
+        product = FactoryGirl.create(:product)
         expect {
-          post :create, product, {:line_item => valid_attributes}, valid_session
+          post :create, {:line_item => valid_attributes}
         }.to change(LineItem, :count).by(1)
       end
 
