@@ -1,19 +1,20 @@
-<h1>Your Cart</h1>
+<h1>Your Cart (index view in line_itmes)</h1>
 
 <table>
   <thead>
     <tr>
+      <th>Qty</th>
       <th>Product</th>
       <th>Price</th>
       <th>Cart #</th>
-      <th></th>
-      <th></th>
+      <th>Update</th>
     </tr>
   </thead>
 
   <tbody>
     <% @line_items.each do |line_item| %>
       <tr>
+        <td><%= line_item.quantity %> &times;</td>
         <td><%= line_item.product.title %></td>
         <td><%= number_to_currency(line_item.product.price) %></td>
         <td><%= line_item.cart_id %></td>

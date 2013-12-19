@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <p>
   <strong>Title:</strong>
@@ -11,13 +13,12 @@
 </p>
 
 <p>
-  <strong>Image url:</strong>
-  <%= @product.image_url %>
+  <%= image_tag(@product.image_url, :size => "180x260") %>
 </p>
 
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= number_to_currency(@product.price) %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
