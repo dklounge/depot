@@ -60,7 +60,7 @@ describe LineItemsController do
 
       it "redirects to the created line_item" do
         post :create, {:line_item => valid_attributes, :product_id => product.id }, valid_session
-        response.should redirect_to (LineItem.last)
+        response.should redirect_to (Cart.last)
       end
     end
 
