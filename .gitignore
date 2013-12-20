@@ -21,3 +21,4 @@ database.yml
 .project
 .DS_Store
 .secret
+config/application.yml
