@@ -1,5 +1,13 @@
 <h1>New order</h1>
 
-<%= render 'form' %>
+<div class="depot_form">
+  <fieldset>
+    <legend>Please enter your payment information</legend>
+    <br>
 
-<%= link_to 'Back', orders_path %>
+    <%= render 'form' %>
+  </fieldset>
+</div>
+
+<br>
+<%= button_to 'Back', orders_path, method: :get %>

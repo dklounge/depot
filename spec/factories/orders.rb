@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :order do
-    name "MyString"
-    address "MyText"
-    email "MyString"
-    pay_type "MyString"
+    name "MyName"
+    address "MyAddress"
+    email "MyEmail@example.org"
+    pay_type "MyMoney"
   end
 end
