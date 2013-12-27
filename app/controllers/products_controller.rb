@@ -49,6 +49,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def who_bought
+    @product = set_product
+    respond_to do |f|
+      f.atom
+      # f.html { render html: @produt }
+      f.json { render json: @product }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
