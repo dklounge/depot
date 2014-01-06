@@ -9,7 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'will_paginate', '~> 3.0'
-
+gem 'newrelic_rpm'
 gem 'guard', :group => :development
 gem 'thin'
 
